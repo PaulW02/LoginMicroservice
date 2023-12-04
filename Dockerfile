@@ -3,6 +3,7 @@ FROM openjdk:18
 
 WORKDIR /app
 
+
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 USER root
