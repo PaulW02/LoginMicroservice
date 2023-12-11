@@ -2,7 +2,9 @@
 /Users/paula/Desktop/KTH/Fullstack/Lab1/LoginMicroservice/src/main/java/com/example/loginmicroservice/entities/User.java
 /Users/paula/Desktop/KTH/Fullstack/Lab1/LoginMicroservice/src/main/java/com/example/loginmicroservice/dtos/UserDTO.java
 /Users/paula/Desktop/KTH/Fullstack/Lab1/LoginMicroservice/src/main/java/com/example/loginmicroservice/controllers/UserController.java
+/Users/paula/Desktop/KTH/Fullstack/Lab1/LoginMicroservice/src/main/java/com/example/loginmicroservice/WebSecurityConfig.java
 /Users/paula/Desktop/KTH/Fullstack/Lab1/LoginMicroservice/src/main/java/com/example/loginmicroservice/services/UserServiceImpl.java
+/Users/paula/Desktop/KTH/Fullstack/Lab1/LoginMicroservice/src/main/java/com/example/loginmicroservice/dtos/CreatePatientDTO.java
 /Users/paula/Desktop/KTH/Fullstack/Lab1/LoginMicroservice/src/main/java/com/example/loginmicroservice/repositories/UserRepository.java
 /Users/paula/Desktop/KTH/Fullstack/Lab1/LoginMicroservice/src/main/java/com/example/loginmicroservice/dtos/UserAuthenticationDTO.java
 /Users/paula/Desktop/KTH/Fullstack/Lab1/LoginMicroservice/src/main/java/com/example/loginmicroservice/dtos/CreateUserDTO.java

@@ -7,18 +7,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
-
-    /*
-    @Autowired
-    private PatientRepository patientRepository;
-*/
     @Override
     public User createUser(String firstname, String lastname, String password, String email, int age, String roles) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
@@ -27,26 +24,40 @@ public class UserServiceImpl implements UserService {
         if (firstname != null && lastname != null && password != null && email != null && age > 0 && roles != null) {
             user = new User(firstname, lastname, encryptedPassword, email, age, roles);
             user = userRepository.save(user);
-            /*
-            if (roles.equals("Patient")) {
-                Patient patient = new Patient(firstname, lastname, age);
-                patient.setUser(user);
-                patientRepository.save(patient);
-            }*/
             return user;
         }
         return null;
     }
 
+    @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
+    @Override
     public User getUserById(Long id) {
         Optional<User> user = userRepository.findById(id);
         return user.orElse(null);
     }
 
+    @Override
+    public Map<Long, String> getUsersByIds(List<Long> userIds) {
+        // Fetch users in batch using userRepository.findAllById
+        List<User> users = userRepository.findAllById(userIds);
+
+        // Ensure the order of the result matches the order of the input userIds
+        return userIds.stream()
+                .collect(Collectors.toMap(
+                        userId -> userId,
+                        userId -> users.stream()
+                                .filter(user -> user.getId().equals(userId))
+                                .findFirst()
+                                .map(user -> user.getFirstName() + " " + user.getLastName())
+                                .orElse(null)
+                ));
+    }
+
+    @Override
     public User updateUser(Long id, User updatedUser) {
         Optional<User> existingUser = userRepository.findById(id);
         if (existingUser.isPresent()) {

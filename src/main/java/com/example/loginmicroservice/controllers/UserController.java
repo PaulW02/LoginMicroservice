@@ -1,5 +1,6 @@
 package com.example.loginmicroservice.controllers;
 
+import com.example.loginmicroservice.dtos.CreatePatientDTO;
 import com.example.loginmicroservice.dtos.CreateUserDTO;
 import com.example.loginmicroservice.dtos.UserAuthenticationDTO;
 import com.example.loginmicroservice.dtos.UserDTO;
@@ -8,8 +9,10 @@ import com.example.loginmicroservice.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -19,10 +22,29 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    private final WebClient patientClient;
+
+    public UserController(WebClient.Builder webClientBuilder) {
+        this.patientClient = webClientBuilder.baseUrl("http://patient-microservice-service:5003/patient").build();
+    }
+
     @PostMapping("/")
     public ResponseEntity<UserDTO> createUser(@RequestBody CreateUserDTO createUserDTO) {
         User createdUser = userService.createUser(createUserDTO.getFirstName(), createUserDTO.getLastName(), createUserDTO.getPassword(), createUserDTO.getEmail(), createUserDTO.getAge(), createUserDTO.getRoles());
+        if (createUserDTO.getRoles().contains("Patient")){
+            patientClient.post()
+                    .uri("/")
+                    .bodyValue(new CreatePatientDTO(createUserDTO.getFirstName(), createUserDTO.getLastName(), createUserDTO.getAge(), createdUser.getId()))
+                    .retrieve()
+                    .toBodilessEntity()
+                    .block();
+        }
         return ResponseEntity.ok(UserDTO.fromUser(createdUser));
+    }
+
+    @GetMapping("/names")
+    public Map<Long, String> getUserNamesByIds(@RequestParam("userIds") List<Long> userIds) {
+        return userService.getUsersByIds(userIds);
     }
 
     @GetMapping("/")
@@ -78,6 +100,16 @@ public class UserController {
         User user = userService.getUserById(id);
         if (user != null) {
             return ResponseEntity.ok(UserDTO.fromUser(user));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/checkUser/{id}")
+    public ResponseEntity<Long> checkUserById(@PathVariable Long id) {
+        User user = userService.getUserById(id);
+        if (user != null) {
+            return ResponseEntity.ok(UserDTO.fromUser(user).getId());
         } else {
             return ResponseEntity.notFound().build();
         }
