@@ -8,10 +8,10 @@ import java.util.Map;
 public interface UserService {
     User createUser(String firstname, String lastname, String password, String email, int age, String roles);
     List<User> getAllUsers();
-    User getUserById(Long id);
-    User updateUser(Long id, User updatedUser);
-    boolean deleteUser(Long id);
-    Map<Long, String> getUsersByIds(List<Long> userIds);
+    User getUserById(String id);
+    User updateUser(String id, User updatedUser);
+    boolean deleteUser(String id);
+    Map<String, String> getUsersByIds(List<String> userIds);
     User loginUser(String username, String password);
 
     List<User> getAllPatients();

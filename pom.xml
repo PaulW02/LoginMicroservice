@@ -85,6 +85,11 @@ http://maven.apache.org/POM/4.0.0 ">
 			<version>6.0.13</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.keycloak</groupId>
+			<artifactId>keycloak-admin-client</artifactId>
+			<version>23.0.0</version> <!-- Use the appropriate version -->
+		</dependency>
 	</dependencies>
 
 	<build>

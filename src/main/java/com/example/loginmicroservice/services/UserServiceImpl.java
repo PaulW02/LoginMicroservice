@@ -35,13 +35,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(Long id) {
+    public User getUserById(String id) {
         Optional<User> user = userRepository.findById(id);
         return user.orElse(null);
     }
 
     @Override
-    public Map<Long, String> getUsersByIds(List<Long> userIds) {
+    public Map<String, String> getUsersByIds(List<String> userIds) {
         // Fetch users in batch using userRepository.findAllById
         List<User> users = userRepository.findAllById(userIds);
 
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(Long id, User updatedUser) {
+    public User updateUser(String id, User updatedUser) {
         Optional<User> existingUser = userRepository.findById(id);
         if (existingUser.isPresent()) {
             updatedUser.setId(id);
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public boolean deleteUser(Long id) {
+    public boolean deleteUser(String id) {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
             userRepository.deleteById(id);

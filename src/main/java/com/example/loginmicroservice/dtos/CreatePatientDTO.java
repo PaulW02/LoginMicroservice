@@ -4,17 +4,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CreatePatientDTO {
 
-    private Long id;
+    private String id;
     private String firstName;
     private String lastName;
     private int age;
-    private Long userId;
+    private String userId;
 
     public CreatePatientDTO(
             @JsonProperty("firstName") String firstName,
             @JsonProperty("lastName") String lastName,
             @JsonProperty("age") int age,
-            @JsonProperty("userId") Long userId
+            @JsonProperty("userId") String userId
     ) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -22,18 +22,18 @@ public class CreatePatientDTO {
         this.userId = userId;
     }
 
-    public CreatePatientDTO(Long id, String firstName, String lastName, int age) {
+    public CreatePatientDTO(String id, String firstName, String lastName, int age) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -61,11 +61,11 @@ public class CreatePatientDTO {
         this.age = age;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 }

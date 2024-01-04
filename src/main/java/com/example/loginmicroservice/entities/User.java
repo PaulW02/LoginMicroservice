@@ -8,8 +8,7 @@ import java.util.List;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -41,7 +40,7 @@ public class User {
 
     }
 
-    public User(Long id, String firstName, String lastName, String email, int age, String roles) {
+    public User(String id, String firstName, String lastName, String email, String roles) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -50,11 +49,11 @@ public class User {
         this.roles = roles;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

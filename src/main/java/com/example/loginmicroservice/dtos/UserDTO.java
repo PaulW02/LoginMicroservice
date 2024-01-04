@@ -4,14 +4,14 @@ import com.example.loginmicroservice.entities.User;
 
 public class UserDTO {
 
-    private Long id;
+    private String id;
     private String firstName;
     private String lastName;
     private String email;
     private String role;
     private int age;
 
-    public UserDTO(Long id, String firstName, String lastName, String email,String role, int age) {
+    public UserDTO(String id, String firstName, String lastName, String email,String role, int age) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -20,19 +20,34 @@ public class UserDTO {
         this.age = age;
     }
 
+    public UserDTO(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
+    public UserDTO(String id, String firstName, String lastName, String email) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
+
     public static UserDTO fromUser(User user) {
         return new UserDTO(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(),user.getRoles(), user.getAge());
     }
 
     public static User fromUserDTO(UserDTO user) {
-        return new User(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getAge(), user.getRole());
+
+        return new User(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getRole());
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
