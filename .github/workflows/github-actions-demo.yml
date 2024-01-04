@@ -14,6 +14,14 @@ jobs:
       -
         name: Login to DockerHub
         uses: docker/login-action@v2
+        with:
+          username: paulw02
+          password: Adda2002!
       -
         name: Build and push
         uses: docker/build-push-action@v3
+        with:
+          context: .  # Path to the Docker context (usually the root of your repository)
+          push: true   # Whether to push the built image
+          tags: |
+            paulw02/login-microservice-image:latest
