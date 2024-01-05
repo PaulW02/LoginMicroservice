@@ -20,7 +20,6 @@ jobs:
         with:
           username: paulw02
           password: dckr_pat_YyCDVGuBu5evnlk_KPT-H7ivWdU
-
       - name: Build and Run Docker Container
         run: |
           docker buildx build --platform linux/amd64 -t paulw02/login-microservice-image .
