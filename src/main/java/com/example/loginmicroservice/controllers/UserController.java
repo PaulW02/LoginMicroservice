@@ -27,7 +27,7 @@ public class UserController {
     private final WebClient patientClient;
 
     public UserController(WebClient.Builder webClientBuilder) {
-        this.patientClient = webClientBuilder.baseUrl("http://patient-microservice-service:5003/patient").build();
+        this.patientClient = webClientBuilder.baseUrl("https://patient-microservice.app.cloud.cbh.kth.se/patient").build();
     }
 
     @PostMapping("/")
